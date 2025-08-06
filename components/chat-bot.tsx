@@ -147,19 +147,19 @@ export function ChatBot() {
                       }`}
                     >
                       <div className={`flex-shrink-0 p-1.5 rounded-full ${
-                        message.type === 'user' ? 'bg-blue-600' : 'bg-gray-200 dark:bg-gray-700'
+                        message.type === 'user' ? 'bg-blue-600' : 'bg-muted'
                       }`}>
                         {message.type === 'user' ? (
                           <User className="h-3 w-3 text-white" />
                         ) : (
-                          <Bot className="h-3 w-3 text-gray-600 dark:text-gray-300" />
+                          <Bot className="h-3 w-3 text-muted-foreground" />
                         )}
                       </div>
                       <div
                         className={`p-3 rounded-2xl text-sm leading-relaxed ${
                           message.type === 'user'
                             ? 'bg-blue-600 text-white rounded-br-md'
-                            : 'bg-gray-100 dark:bg-gray-800 text-gray-900 dark:text-gray-100 rounded-bl-md'
+                            : 'bg-muted text-foreground rounded-bl-md'
                         }`}
                       >
                         {message.content}

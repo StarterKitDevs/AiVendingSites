@@ -3,8 +3,9 @@
 import React, { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
+import { Badge } from '@/components/ui/badge';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { Menu, X, Settings } from 'lucide-react';
+import { Menu, X, Settings, Zap, Sparkles } from 'lucide-react';
 
 export function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -18,17 +19,19 @@ export function Navbar() {
   ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 z-50 bg-black/80 backdrop-blur-md border-b border-white/20">
+    <nav className="fixed top-0 left-0 right-0 z-50 bg-background/95 backdrop-blur-md border-b border-border">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">⚡</span>
-              </div>
-              <span className="text-xl font-bold text-white">AI Web Agency</span>
-            </Link>
+          {/* Logo - Updated to match Starter Kit design */}
+          <div className="flex items-center space-x-4">
+            <div className="flex items-center space-x-2">
+              <Zap className="h-8 w-8 text-blue-600" />
+              <span className="text-xl font-bold text-foreground">AI Web Agency</span>
+            </div>
+            <Badge variant="outline" className="text-blue-600">
+              <Sparkles className="mr-1 h-3 w-3" />
+              AI-Powered
+            </Badge>
           </div>
 
           {/* Desktop Navigation */}
@@ -38,7 +41,7 @@ export function Navbar() {
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="text-gray-300 hover:text-white px-3 py-2 rounded-md text-sm font-medium transition-colors"
+                  className="text-muted-foreground hover:text-foreground px-3 py-2 rounded-md text-sm font-medium transition-colors"
                 >
                   {item.name}
                 </Link>
@@ -48,28 +51,39 @@ export function Navbar() {
 
           {/* Desktop Actions */}
           <div className="hidden md:flex items-center space-x-6">
-            <a href="#features" className="text-gray-300 hover:text-white transition-colors text-sm">
+            <a href="#features" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Features
             </a>
-            <a href="#pricing" className="text-gray-300 hover:text-white transition-colors text-sm">
+            <a href="#pricing" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Pricing
             </a>
-            <a href="/bolt-diy" className="text-gray-300 hover:text-white transition-colors text-sm">
-              Bolt DIY
+            <a href="/bolt-diy" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
+              Starter Kit
             </a>
-            <a href="#contact" className="text-gray-300 hover:text-white transition-colors text-sm">
+            <a href="#contact" className="text-muted-foreground hover:text-foreground transition-colors text-sm">
               Contact
             </a>
-            <ThemeToggle />
+            {/* Theme Toggle - Desktop */}
+            <ThemeToggle 
+              variant="ghost" 
+              size="icon" 
+              className="text-muted-foreground hover:text-foreground hover:bg-accent"
+            />
           </div>
 
-          {/* Mobile menu button - Always visible on mobile */}
-          <div className="md:hidden flex items-center">
+          {/* Mobile menu button and theme toggle */}
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Theme Toggle - Mobile */}
+            <ThemeToggle 
+              variant="ghost" 
+              size="icon" 
+              className="text-muted-foreground hover:text-foreground hover:bg-accent"
+            />
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20"
+              className="p-2 text-muted-foreground hover:text-foreground hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring"
               aria-label="Toggle mobile menu"
             >
               {isMenuOpen ? (
@@ -84,14 +98,14 @@ export function Navbar() {
 
       {/* Mobile Navigation - Full screen overlay */}
       {isMenuOpen && (
-        <div className="md:hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-md">
+        <div className="md:hidden fixed inset-0 z-40 bg-background/95 backdrop-blur-md">
           <div className="pt-20 px-4">
             <div className="space-y-6">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
                   href={item.href}
-                  className="block text-white hover:text-blue-400 text-xl font-medium transition-colors py-3 border-b border-white/10"
+                  className="block text-foreground hover:text-primary text-xl font-medium transition-colors py-3 border-b border-border"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   {item.name}
@@ -102,49 +116,46 @@ export function Navbar() {
               <div className="pt-6 space-y-4">
                 <a 
                   href="#features" 
-                  className="block text-gray-300 hover:text-white text-lg transition-colors py-2"
+                  className="block text-muted-foreground hover:text-foreground text-lg transition-colors py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Features
                 </a>
                 <a 
                   href="#pricing" 
-                  className="block text-gray-300 hover:text-white text-lg transition-colors py-2"
+                  className="block text-muted-foreground hover:text-foreground text-lg transition-colors py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Pricing
                 </a>
                 <a 
                   href="/bolt-diy" 
-                  className="block text-gray-300 hover:text-white text-lg transition-colors py-2"
+                  className="block text-muted-foreground hover:text-foreground text-lg transition-colors py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Bolt DIY
+                  Starter Kit
                 </a>
                 <a 
                   href="#contact" 
-                  className="block text-gray-300 hover:text-white text-lg transition-colors py-2"
+                  className="block text-muted-foreground hover:text-foreground text-lg transition-colors py-2"
                   onClick={() => setIsMenuOpen(false)}
                 >
                   Contact
                 </a>
               </div>
               
-              {/* Mobile admin access and theme toggle */}
-              <div className="pt-6 flex flex-col space-y-4 border-t border-white/20">
-                <div className="flex items-center justify-between">
-                  <ThemeToggle />
-                  <Link href="/admin/login" onClick={() => setIsMenuOpen(false)}>
-                    <Button 
-                      variant="ghost" 
-                      size="sm"
-                      className="text-gray-300 hover:text-white"
-                    >
-                      <Settings className="h-4 w-4 mr-2" />
-                      Admin Access
-                    </Button>
-                  </Link>
-                </div>
+              {/* Mobile admin access */}
+              <div className="pt-6 flex flex-col space-y-4 border-t border-border">
+                <Link href="/admin/login" onClick={() => setIsMenuOpen(false)}>
+                  <Button 
+                    variant="ghost" 
+                    size="sm"
+                    className="text-muted-foreground hover:text-foreground"
+                  >
+                    <Settings className="h-4 w-4 mr-2" />
+                    Admin Access
+                  </Button>
+                </Link>
               </div>
             </div>
           </div>

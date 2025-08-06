@@ -90,12 +90,12 @@ export function ToastContainer() {
           <div className="flex-shrink-0 mt-0.5">
             {getToastIcon(toast.type)}
           </div>
-          <div className="flex-1 min-w-0">
-            <h4 className="text-sm font-medium text-gray-900 dark:text-gray-100">
+          <div className="flex-1">
+            <h4 className="text-sm font-medium text-foreground">
               {toast.title}
             </h4>
             {toast.message && (
-              <p className="text-sm text-gray-600 dark:text-gray-400 mt-1">
+              <p className="text-sm text-muted-foreground mt-1">
                 {toast.message}
               </p>
             )}
@@ -104,7 +104,7 @@ export function ToastContainer() {
             onClick={() => {
               setToasts(prev => prev.filter(t => t.id !== toast.id))
             }}
-            className="flex-shrink-0 text-gray-400 hover:text-gray-600 dark:hover:text-gray-300"
+            className="flex-shrink-0 text-muted-foreground hover:text-foreground"
           >
             <X className="h-4 w-4" />
           </button>

@@ -15,7 +15,7 @@ export function Hero() {
             </div>
           </div>
           
-          <h1 className="mb-6 text-4xl font-bold tracking-tight text-gray-900 dark:text-white sm:text-6xl lg:text-7xl">
+          <h1 className="mb-6 text-4xl font-bold tracking-tight text-foreground sm:text-6xl lg:text-7xl">
             Transform Your Business with
             <span className="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
               {" "}AI-Powered{" "}
@@ -23,7 +23,7 @@ export function Hero() {
             Web Development
           </h1>
           
-          <p className="mb-8 text-xl text-gray-600 dark:text-gray-300">
+          <p className="mb-8 text-xl text-muted-foreground">
             Get custom websites, e-commerce solutions, and digital experiences that drive results. 
             From concept to launch in days, not months.
           </p>

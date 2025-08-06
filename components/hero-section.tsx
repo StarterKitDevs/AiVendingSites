@@ -58,20 +58,21 @@ export function HeroSection({ onGetQuote }: HeroSectionProps) {
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
             <Button 
-              size="lg" 
+              variant="gradient"
+              size="xl" 
               onClick={handleGetWebsiteNow}
-              className="px-10 py-6 text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 transition-all duration-300 transform hover:scale-105 shadow-2xl border-0"
+              className="group hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300"
             >
               Get Your Website Now
-              <ArrowRight className="ml-3 h-6 w-6" />
+              <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
             </Button>
             <Link href="/bolt-diy">
               <Button 
-                variant="outline" 
-                size="lg"
-                className="px-10 py-6 text-xl font-semibold border-2 border-white/30 text-white hover:bg-white/10 backdrop-blur-sm"
+                variant="outlineGradient" 
+                size="xl"
+                className="hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300"
               >
-                Try Bolt DIY
+                Try Starter Kit
               </Button>
             </Link>
           </div>

@@ -2,7 +2,7 @@
 
 import { useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { Header } from '@/components/header'
+import { Header } from '@/components/ui/header'
 import DashboardContent from '@/components/dashboard-content'
 import { useAuth } from '@/lib/auth-context'
 import { LoginModal } from '@/components/auth/login-modal'
@@ -30,7 +30,7 @@ export default function DashboardPage() {
   if (!user) {
     return (
       <div className="min-h-screen bg-background">
-        <Header />
+        <Header title="Starter Kit" />
         <LoginModal
           isOpen={showLoginModal}
           onClose={() => {
@@ -48,7 +48,7 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header title="Starter Kit" />
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-4xl mx-auto">
           <div className="flex items-center justify-between mb-8">

@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Navbar } from '@/components/navbar';
+import { Header } from '@/components/ui/header';
 import { HeroSection } from '@/components/hero-section';
 import QuoteForm from '@/components/quote-form';
 import { ProcessTimeline } from '@/components/process-timeline';
@@ -13,7 +13,7 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Navbar />
+      <Header title="Starter Kit" />
       <main>
         <HeroSection onGetQuote={() => setShowQuoteForm(true)} />
         <QuoteForm />

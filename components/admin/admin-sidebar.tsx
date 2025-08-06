@@ -85,9 +85,11 @@ export function AdminSidebar({ isOpen, setIsOpen }: AdminSidebarProps) {
         <div className="flex h-16 items-center justify-between px-4 border-b border-gray-200 dark:border-gray-700">
           {isOpen ? (
             <div className="flex items-center space-x-2">
-              <Zap className="h-8 w-8 text-blue-600" />
-              <span className="text-xl font-bold text-gray-900 dark:text-white">
-                Admin Panel
+              <div className="h-8 w-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
+                <span className="text-white font-bold text-sm">⚡</span>
+              </div>
+              <span className="text-xl font-bold text-foreground">
+                AI Web Agency
               </span>
             </div>
           ) : (
@@ -115,7 +117,7 @@ export function AdminSidebar({ isOpen, setIsOpen }: AdminSidebarProps) {
                   "group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors",
                   isActive
                     ? "bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100"
-                    : "text-gray-600 hover:bg-gray-100 hover:text-gray-900 dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-white"
+                    : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                 )}
               >
                 <item.icon
@@ -123,7 +125,7 @@ export function AdminSidebar({ isOpen, setIsOpen }: AdminSidebarProps) {
                     "mr-3 h-5 w-5 flex-shrink-0",
                     isActive
                       ? "text-blue-600 dark:text-blue-400"
-                      : "text-gray-400 group-hover:text-gray-500 dark:text-gray-400 dark:group-hover:text-gray-300"
+                      : "text-muted-foreground group-hover:text-accent-foreground"
                   )}
                 />
                 {isOpen && (
@@ -143,18 +145,18 @@ export function AdminSidebar({ isOpen, setIsOpen }: AdminSidebarProps) {
 
         {/* Quick Stats */}
         {isOpen && (
-          <div className="px-4 py-4 border-t border-gray-200 dark:border-gray-700">
+          <div className="px-4 py-4 border-t border-border">
             <div className="space-y-3">
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500 dark:text-gray-400">Active Projects</span>
+                <span className="text-muted-foreground">Active Projects</span>
                 <span className="font-semibold text-green-600">8</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500 dark:text-gray-400">Revenue Today</span>
+                <span className="text-muted-foreground">Revenue Today</span>
                 <span className="font-semibold text-blue-600">$2,450</span>
               </div>
               <div className="flex items-center justify-between text-sm">
-                <span className="text-gray-500 dark:text-gray-400">System Status</span>
+                <span className="text-muted-foreground">System Status</span>
                 <div className="flex items-center">
                   <div className="h-2 w-2 bg-green-500 rounded-full mr-2"></div>
                   <span className="text-green-600">Online</span>

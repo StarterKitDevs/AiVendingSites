@@ -9,6 +9,7 @@ import { Badge } from '@/components/ui/badge';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { Checkbox } from '@/components/ui/checkbox';
 import { Slider } from '@/components/ui/slider';
+import { Header } from '@/components/ui/header';
 import { 
   Globe, 
   Palette, 
@@ -324,34 +325,15 @@ export default function BoltDIY() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900">
       {/* Header */}
-      <div className="bg-white border-b">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-4">
-              <div className="flex items-center space-x-2">
-                <Zap className="h-8 w-8 text-blue-600" />
-                <span className="text-xl font-bold text-gray-900">Bolt DIY</span>
-              </div>
-              <Badge variant="outline" className="text-blue-600">
-                <Sparkles className="mr-1 h-3 w-3" />
-                AI-Powered
-              </Badge>
-            </div>
-            <div className="flex items-center space-x-4">
-              <Button variant="outline" size="sm">
-                <Settings className="mr-2 h-4 w-4" />
-                Settings
-              </Button>
-              <Button size="sm">
-                <Play className="mr-2 h-4 w-4" />
-                Preview
-              </Button>
-            </div>
-          </div>
-        </div>
-      </div>
+      <Header 
+        title="Starter Kit" 
+        showSettings={true} 
+        showPreview={true}
+        onSettingsClick={() => console.log('Settings clicked')}
+        onPreviewClick={() => console.log('Preview clicked')}
+      />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Progress Steps */}
@@ -360,7 +342,7 @@ export default function BoltDIY() {
             {[1, 2, 3, 4].map((stepNumber) => (
               <div key={stepNumber} className="flex items-center">
                 <div className={`flex items-center justify-center w-8 h-8 rounded-full ${
-                  step >= stepNumber ? 'bg-blue-600 text-white' : 'bg-gray-200 text-gray-500'
+                  step >= stepNumber ? 'bg-blue-600 text-white' : 'bg-muted text-muted-foreground'
                 }`}>
                   {step > stepNumber ? (
                     <CheckCircle className="h-5 w-5" />
@@ -370,23 +352,23 @@ export default function BoltDIY() {
                 </div>
                 {stepNumber < 4 && (
                   <div className={`w-16 h-0.5 mx-4 ${
-                    step > stepNumber ? 'bg-blue-600' : 'bg-gray-200'
+                    step > stepNumber ? 'bg-blue-600' : 'bg-muted'
                   }`} />
                 )}
               </div>
             ))}
           </div>
           <div className="flex justify-center mt-4 space-x-8 text-sm">
-            <span className={step >= 1 ? 'text-blue-600 font-medium' : 'text-gray-500'}>
+            <span className={step >= 1 ? 'text-blue-600 font-medium' : 'text-muted-foreground'}>
               Choose Template
             </span>
-            <span className={step >= 2 ? 'text-blue-600 font-medium' : 'text-gray-500'}>
+            <span className={step >= 2 ? 'text-blue-600 font-medium' : 'text-muted-foreground'}>
               Customize
             </span>
-            <span className={step >= 3 ? 'text-blue-600 font-medium' : 'text-gray-500'}>
+            <span className={step >= 3 ? 'text-blue-600 font-medium' : 'text-muted-foreground'}>
               Generate
             </span>
-            <span className={step >= 4 ? 'text-blue-600 font-medium' : 'text-gray-500'}>
+            <span className={step >= 4 ? 'text-blue-600 font-medium' : 'text-muted-foreground'}>
               Launch
             </span>
           </div>
@@ -396,10 +378,10 @@ export default function BoltDIY() {
         {step === 1 && (
           <div className="space-y-6">
             <div className="text-center">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-foreground mb-2">
                 Choose Your Website Template
               </h1>
-              <p className="text-gray-600 max-w-2xl mx-auto">
+              <p className="text-muted-foreground max-w-2xl mx-auto">
                 Select from our curated collection of professional templates, 
                 each designed to convert and engage your audience.
               </p>
@@ -418,18 +400,18 @@ export default function BoltDIY() {
                     <div className="flex items-center justify-between">
                       <CardTitle className="text-lg">{template.name}</CardTitle>
                       {template.popular && (
-                        <Badge className="bg-orange-100 text-orange-800">
+                        <Badge className="bg-orange-100 text-orange-800 dark:bg-orange-900 dark:text-orange-200">
                           <Star className="mr-1 h-3 w-3" />
                           Popular
                         </Badge>
                       )}
                     </div>
-                    <p className="text-sm text-gray-600">{template.description}</p>
+                    <p className="text-sm text-muted-foreground">{template.description}</p>
                   </CardHeader>
                   <CardContent>
                     <div className="space-y-3">
-                      <div className="h-32 bg-gradient-to-br from-gray-100 to-gray-200 rounded-lg flex items-center justify-center">
-                        <Globe className="h-8 w-8 text-gray-400" />
+                      <div className="h-32 bg-gradient-to-br from-muted to-muted/50 rounded-lg flex items-center justify-center">
+                        <Globe className="h-8 w-8 text-muted-foreground" />
                       </div>
                       <div className="flex flex-wrap gap-1">
                         {template.features.slice(0, 3).map((feature) => (
@@ -444,7 +426,7 @@ export default function BoltDIY() {
                         )}
                       </div>
                       <div className="flex items-center justify-between">
-                        <span className="text-lg font-semibold text-gray-900">
+                        <span className="text-lg font-semibold text-foreground">
                           ${template.price}
                         </span>
                         <Button size="sm">
@@ -464,10 +446,10 @@ export default function BoltDIY() {
         {step === 2 && selectedTemplate && (
           <div className="space-y-8">
             <div className="text-center">
-              <h1 className="text-3xl font-bold text-gray-900 mb-2">
+              <h1 className="text-3xl font-bold text-foreground mb-2">
                 Customize Your Website
               </h1>
-              <p className="text-gray-600">
+              <p className="text-muted-foreground">
                 Personalize your {selectedTemplate.name} to match your brand and requirements.
               </p>
             </div>
@@ -484,7 +466,7 @@ export default function BoltDIY() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground mb-2">
                         Website Name
                       </label>
                       <Input
@@ -494,7 +476,7 @@ export default function BoltDIY() {
                       />
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground mb-2">
                         Business Description
                       </label>
                       <Textarea
@@ -516,7 +498,7 @@ export default function BoltDIY() {
                   </CardHeader>
                   <CardContent className="space-y-4">
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground mb-2">
                         Design Style
                       </label>
                       <Select value={selectedStyle} onValueChange={setSelectedStyle}>
@@ -528,7 +510,7 @@ export default function BoltDIY() {
                             <SelectItem key={style.id} value={style.id}>
                               <div>
                                 <div className="font-medium">{style.name}</div>
-                                <div className="text-sm text-gray-500">{style.description}</div>
+                                <div className="text-sm text-muted-foreground">{style.description}</div>
                               </div>
                             </SelectItem>
                           ))}
@@ -536,7 +518,7 @@ export default function BoltDIY() {
                       </Select>
                     </div>
                     <div>
-                      <label className="block text-sm font-medium text-gray-700 mb-2">
+                      <label className="block text-sm font-medium text-foreground mb-2">
                         Color Scheme
                       </label>
                       <div className="grid grid-cols-3 gap-2">
@@ -544,7 +526,7 @@ export default function BoltDIY() {
                           <div
                             key={color.id}
                             className={`p-3 rounded-lg cursor-pointer border-2 transition-all ${
-                              selectedColor === color.id ? 'border-blue-500' : 'border-gray-200'
+                              selectedColor === color.id ? 'border-blue-500' : 'border-border'
                             }`}
                             onClick={() => setSelectedColor(color.id)}
                           >
@@ -552,7 +534,7 @@ export default function BoltDIY() {
                               className="w-full h-8 rounded"
                               style={{ backgroundColor: color.color }}
                             />
-                            <div className="text-xs text-center mt-1">{color.name}</div>
+                            <div className="text-xs text-center mt-1 text-foreground">{color.name}</div>
                           </div>
                         ))}
                       </div>
@@ -587,7 +569,7 @@ export default function BoltDIY() {
                             checked={selectedFeatures.includes(feature)}
                             onCheckedChange={() => handleFeatureToggle(feature)}
                           />
-                          <label htmlFor={feature} className="text-sm font-medium text-gray-700">
+                          <label htmlFor={feature} className="text-sm font-medium text-foreground">
                             {feature}
                           </label>
                         </div>
@@ -608,7 +590,7 @@ export default function BoltDIY() {
                       </CardHeader>
                       <CardContent className="space-y-4">
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-foreground mb-2">
                             Website Layout
                           </label>
                           <Select value={selectedLayout} onValueChange={setSelectedLayout}>
@@ -620,7 +602,7 @@ export default function BoltDIY() {
                                 <SelectItem key={layout.id} value={layout.id}>
                                   <div>
                                     <div className="font-medium">{layout.name}</div>
-                                    <div className="text-sm text-gray-500">{layout.description}</div>
+                                    <div className="text-sm text-muted-foreground">{layout.description}</div>
                                   </div>
                                 </SelectItem>
                               ))}
@@ -646,7 +628,7 @@ export default function BoltDIY() {
                                 checked={selectedSections.includes(section)}
                                 onCheckedChange={() => handleSectionToggle(section)}
                               />
-                              <label htmlFor={section} className="text-sm font-medium text-gray-700">
+                              <label htmlFor={section} className="text-sm font-medium text-foreground">
                                 {section}
                               </label>
                             </div>
@@ -671,7 +653,7 @@ export default function BoltDIY() {
                                 checked={selectedAdvancedFeatures.includes(feature)}
                                 onCheckedChange={() => handleAdvancedFeatureToggle(feature)}
                               />
-                              <label htmlFor={feature} className="text-sm font-medium text-gray-700">
+                              <label htmlFor={feature} className="text-sm font-medium text-foreground">
                                 {feature}
                               </label>
                             </div>
@@ -689,7 +671,7 @@ export default function BoltDIY() {
                       </CardHeader>
                       <CardContent>
                         <div>
-                          <label className="block text-sm font-medium text-gray-700 mb-2">
+                          <label className="block text-sm font-medium text-foreground mb-2">
                             Special Requirements
                           </label>
                           <Textarea
@@ -698,7 +680,7 @@ export default function BoltDIY() {
                             onChange={(e) => setCustomRequirements(e.target.value)}
                             rows={4}
                           />
-                          <p className="text-xs text-gray-500 mt-2">
+                          <p className="text-xs text-muted-foreground mt-2">
                             Tell us about any specific functionality, integrations, or unique features you need.
                           </p>
                         </div>
@@ -756,35 +738,35 @@ export default function BoltDIY() {
                   <CardContent className="space-y-4">
                     <div className="space-y-2">
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Template:</span>
+                        <span className="text-muted-foreground">Template:</span>
                         <span className="font-medium">{selectedTemplate.name}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Features:</span>
+                        <span className="text-muted-foreground">Features:</span>
                         <span className="font-medium">{selectedFeatures.length}</span>
                       </div>
                       {selectedTemplate?.id === 'freestyle' && (
                         <>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Layout:</span>
+                            <span className="text-muted-foreground">Layout:</span>
                             <span className="font-medium">{selectedLayout || 'Not selected'}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Sections:</span>
+                            <span className="text-muted-foreground">Sections:</span>
                             <span className="font-medium">{selectedSections.length}</span>
                           </div>
                           <div className="flex justify-between">
-                            <span className="text-gray-600">Advanced Features:</span>
+                            <span className="text-muted-foreground">Advanced Features:</span>
                             <span className="font-medium">{selectedAdvancedFeatures.length}</span>
                           </div>
                         </>
                       )}
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Style:</span>
+                        <span className="text-muted-foreground">Style:</span>
                         <span className="font-medium">{selectedStyle || 'Not selected'}</span>
                       </div>
                       <div className="flex justify-between">
-                        <span className="text-gray-600">Budget:</span>
+                        <span className="text-muted-foreground">Budget:</span>
                         <span className="font-medium">${budget[0]}</span>
                       </div>
                     </div>
