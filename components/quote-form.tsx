@@ -61,19 +61,23 @@ interface FormData {
 }
 
 const websiteTypes: WebsiteType[] = [
-  { value: 'business', label: 'Business Website', price: 150 },
-  { value: 'portfolio', label: 'Portfolio/Personal', price: 100 },
-  { value: 'blog', label: 'Blog/News Site', price: 125 },
-  { value: 'ecommerce', label: 'E-commerce Store', price: 200 },
-  { value: 'restaurant', label: 'Restaurant', price: 175 },
-  { value: 'saas', label: 'SaaS Platform', price: 250 }
+  { value: 'basic-ai', label: 'Basic AI Website', price: 297 },
+  { value: 'professional-ai', label: 'Professional AI Website', price: 497 },
+  { value: 'enterprise-ai', label: 'Enterprise AI Website', price: 797 }
 ]
 
 const features: Feature[] = [
-  { id: 'analytics', label: 'Analytics Setup', price: 30 },
-  { id: 'responsive', label: 'Mobile Responsive', price: 0 },
-  { id: 'ssl', label: 'SSL Security', price: 0 },
-  { id: 'contentManagement', label: 'Content Management', price: 75 }
+  { id: 'ai-personalization', label: 'AI Personalization', price: 0 },
+  { id: 'voice-interface', label: 'Voice Interface', price: 0 },
+  { id: 'pwa-capabilities', label: 'PWA Capabilities', price: 0 },
+  { id: 'advanced-analytics', label: 'Advanced Analytics', price: 0 },
+  { id: 'beautiful-shadows', label: 'Beautiful Shadows', price: 0 },
+  { id: 'professional-typography', label: 'Professional Typography', price: 0 },
+  { id: 'custom-ai-training', label: 'Custom AI Training', price: 200 },
+  { id: 'advanced-integrations', label: 'Advanced Integrations', price: 150 },
+  { id: 'chatbot-integration', label: 'Chatbot Integration', price: 100 },
+  { id: 'monthly-optimization', label: 'Monthly Optimization', price: 75 },
+  { id: 'white-label', label: 'White-label Options', price: 300 }
 ]
 
 const designStyles: DesignStyle[] = [
@@ -111,11 +115,26 @@ export default function QuoteForm() {
 
   // Calculate estimate with proper updates
   const calculateEstimate = useCallback(() => {
-    let total = formData.budget
-    if (formData.features?.analytics) total += 30
-    if (formData.features?.contentManagement) total += 75
+    let total = 0
+    
+    // Base price from website type
+    const selectedWebsiteType = websiteTypes.find(wt => wt.value === formData.websiteType)
+    if (selectedWebsiteType) {
+      total += selectedWebsiteType.price
+    }
+    
+    // Add feature costs
+    Object.entries(formData.features).forEach(([featureName, isEnabled]) => {
+      if (isEnabled) {
+        const feature = features.find(f => f.id === featureName)
+        if (feature) {
+          total += feature.price
+        }
+      }
+    })
+    
     setEstimate(total)
-  }, [formData.budget, formData.features])
+  }, [formData.websiteType, formData.features])
 
   useEffect(() => {
     calculateEstimate()

@@ -3,7 +3,7 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
-import { ArrowRight, Clock, Users, CheckCircle, Settings } from 'lucide-react';
+import { ArrowRight, Clock, Users, CheckCircle, Settings, Zap, Star, Shield } from 'lucide-react';
 import Link from 'next/link';
 
 interface HeroSectionProps {
@@ -45,15 +45,17 @@ export function HeroSection({ onGetQuote }: HeroSectionProps) {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            AI-Powered Websites Built in{" "}
+            AI Creates{" "}
             <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Minutes, Not Weeks
+              Apple-Level Websites
+            </span>
+            <span className="block text-4xl md:text-5xl text-white mt-2">
+              in 13 Minutes
             </span>
           </h1>
           
           <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
-            Professional websites with payment → automated creation → live deployment. 
-            Get your business online with enterprise-grade features in under an hour.
+            Professional design that rivals $10k+ agencies • Analytics work immediately • Zero setup required
           </p>
           
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
@@ -91,35 +93,45 @@ export function HeroSection({ onGetQuote }: HeroSectionProps) {
             </Link>
           </div>
 
-          {/* Stats Grid - Exact Match */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
+          {/* Enhanced Stats Grid with 2025 Features */}
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
             <div className="flex items-center justify-center space-x-4 p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 shadow-xl">
               <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
-                <Users className="h-6 w-6 text-white" />
+                <Zap className="h-6 w-6 text-white" />
               </div>
               <div className="text-left">
-                <div className="text-3xl font-bold text-white">200+</div>
-                <div className="text-sm text-gray-300">Sites Delivered</div>
+                <div className="text-2xl font-bold text-white">13 Min</div>
+                <div className="text-sm text-gray-300">Creation Time</div>
+              </div>
+            </div>
+            
+            <div className="flex items-center justify-center space-x-4 p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 shadow-xl">
+              <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+                <Star className="h-6 w-6 text-white" />
+              </div>
+              <div className="text-left">
+                <div className="text-2xl font-bold text-white">Apple-Level</div>
+                <div className="text-sm text-gray-300">Design Quality</div>
               </div>
             </div>
             
             <div className="flex items-center justify-center space-x-4 p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 shadow-xl">
               <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center">
-                <Clock className="h-6 w-6 text-white" />
+                <Shield className="h-6 w-6 text-white" />
               </div>
               <div className="text-left">
-                <div className="text-3xl font-bold text-white">13 Min</div>
-                <div className="text-sm text-gray-300">Average Delivery</div>
+                <div className="text-2xl font-bold text-white">Sub-2s</div>
+                <div className="text-sm text-gray-300">Loading Speed</div>
               </div>
             </div>
             
             <div className="flex items-center justify-center space-x-4 p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 shadow-xl">
-              <div className="w-12 h-12 bg-gradient-to-r from-emerald-500 to-emerald-600 rounded-xl flex items-center justify-center">
+              <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center">
                 <CheckCircle className="h-6 w-6 text-white" />
               </div>
               <div className="text-left">
-                <div className="text-3xl font-bold text-white">99.9%</div>
-                <div className="text-sm text-gray-300">Uptime SLA</div>
+                <div className="text-2xl font-bold text-white">Zero Setup</div>
+                <div className="text-sm text-gray-300">Analytics Ready</div>
               </div>
             </div>
           </div>

@@ -29,6 +29,7 @@ import {
   Star
 } from 'lucide-react';
 import { showSuccess, showError } from '@/lib/toast';
+import Link from 'next/link';
 
 interface WebsiteTemplate {
   id: string;
@@ -42,71 +43,180 @@ interface WebsiteTemplate {
 }
 
 const websiteTemplates: WebsiteTemplate[] = [
-  {
-    id: 'freestyle',
-    name: 'Freestyle Custom',
-    category: 'Custom',
-    description: 'Start from scratch and build your dream website with complete creative freedom',
-    features: ['Complete Customization', 'Unique Design', 'Flexible Layout', 'Custom Features'],
-    price: 399,
-    image: '/templates/freestyle.jpg',
-    popular: true
-  },
-  {
-    id: 'modern-landing',
-    name: 'Modern Landing Page',
-    category: 'Landing',
-    description: 'Clean, conversion-focused landing page with modern design',
-    features: ['Responsive Design', 'Contact Forms', 'SEO Optimized', 'Analytics'],
-    price: 299,
-    image: '/templates/modern-landing.jpg',
-    popular: true
-  },
-  {
-    id: 'ecommerce-store',
-    name: 'E-commerce Store',
-    category: 'E-commerce',
-    description: 'Full-featured online store with payment integration',
-    features: ['Product Catalog', 'Shopping Cart', 'Payment Gateway', 'Inventory Management'],
-    price: 599,
-    image: '/templates/ecommerce.jpg'
-  },
-  {
-    id: 'portfolio-showcase',
-    name: 'Portfolio Showcase',
-    category: 'Portfolio',
-    description: 'Professional portfolio to showcase your work',
-    features: ['Project Gallery', 'About Section', 'Contact Form', 'Social Links'],
-    price: 199,
-    image: '/templates/portfolio.jpg'
-  },
-  {
-    id: 'blog-platform',
-    name: 'Blog Platform',
-    category: 'Blog',
-    description: 'Content-focused blog with rich features',
-    features: ['Rich Editor', 'Categories', 'Comments', 'Newsletter'],
-    price: 249,
-    image: '/templates/blog.jpg'
-  },
+  // SaaS & Tech Startup Templates
   {
     id: 'saas-dashboard',
     name: 'SaaS Dashboard',
-    category: 'SaaS',
-    description: 'Modern SaaS application with user management',
-    features: ['User Authentication', 'Dashboard', 'API Integration', 'Analytics'],
-    price: 799,
+    category: 'SaaS & Tech Startup',
+    description: 'Modern SaaS application with user management and analytics',
+    features: ['User Authentication', 'Dashboard', 'API Integration', 'Analytics', 'AI Personalization'],
+    price: 397,
     image: '/templates/saas.jpg',
     popular: true
   },
   {
-    id: 'restaurant-site',
-    name: 'Restaurant Website',
-    category: 'Business',
-    description: 'Complete restaurant website with online ordering',
-    features: ['Menu Display', 'Online Ordering', 'Reservations', 'Reviews'],
-    price: 349,
+    id: 'tech-startup',
+    name: 'Tech Startup Landing',
+    category: 'SaaS & Tech Startup',
+    description: 'High-converting landing page for tech startups',
+    features: ['Lead Generation', 'Product Showcase', 'Testimonials', 'Pricing Tables'],
+    price: 297,
+    image: '/templates/tech-startup.jpg'
+  },
+  {
+    id: 'app-landing',
+    name: 'App Landing Page',
+    category: 'SaaS & Tech Startup',
+    description: 'Mobile app landing page with download integration',
+    features: ['App Store Integration', 'Feature Showcase', 'User Reviews', 'Download Tracking'],
+    price: 297,
+    image: '/templates/app-landing.jpg'
+  },
+  
+  // E-commerce Store Templates
+  {
+    id: 'ecommerce-store',
+    name: 'E-commerce Store',
+    category: 'E-commerce Store',
+    description: 'Full-featured online store with payment integration',
+    features: ['Product Catalog', 'Shopping Cart', 'Payment Gateway', 'Inventory Management', 'PWA Support'],
+    price: 597,
+    image: '/templates/ecommerce.jpg',
+    popular: true
+  },
+  {
+    id: 'fashion-store',
+    name: 'Fashion Store',
+    category: 'E-commerce Store',
+    description: 'Elegant fashion and clothing store',
+    features: ['Product Filtering', 'Size Guide', 'Wishlist', 'Social Shopping'],
+    price: 497,
+    image: '/templates/fashion-store.jpg'
+  },
+  {
+    id: 'electronics-store',
+    name: 'Electronics Store',
+    category: 'E-commerce Store',
+    description: 'Modern electronics and gadgets store',
+    features: ['Product Comparison', 'Tech Specs', 'Reviews System', 'Warranty Info'],
+    price: 497,
+    image: '/templates/electronics-store.jpg'
+  },
+  
+  // Professional Services Templates
+  {
+    id: 'law-firm',
+    name: 'Law Firm',
+    category: 'Professional Services',
+    description: 'Professional law firm website with case management',
+    features: ['Case Studies', 'Attorney Profiles', 'Consultation Booking', 'Legal Blog'],
+    price: 397,
+    image: '/templates/law-firm.jpg'
+  },
+  {
+    id: 'consulting',
+    name: 'Consulting Agency',
+    category: 'Professional Services',
+    description: 'Professional consulting and advisory services',
+    features: ['Service Portfolio', 'Client Testimonials', 'Case Studies', 'Booking System'],
+    price: 397,
+    image: '/templates/consulting.jpg'
+  },
+  {
+    id: 'accounting',
+    name: 'Accounting Firm',
+    category: 'Professional Services',
+    description: 'Modern accounting and financial services',
+    features: ['Service Calculator', 'Tax Resources', 'Client Portal', 'Appointment Booking'],
+    price: 397,
+    image: '/templates/accounting.jpg'
+  },
+  
+  // Creative Portfolio Templates
+  {
+    id: 'portfolio-showcase',
+    name: 'Portfolio Showcase',
+    category: 'Creative Portfolio',
+    description: 'Professional portfolio to showcase your work',
+    features: ['Project Gallery', 'About Section', 'Contact Form', 'Social Links', 'Beautiful Shadows'],
+    price: 297,
+    image: '/templates/portfolio.jpg'
+  },
+  {
+    id: 'photography',
+    name: 'Photography Portfolio',
+    category: 'Creative Portfolio',
+    description: 'Stunning photography portfolio with gallery',
+    features: ['Image Gallery', 'Lightbox View', 'Client Albums', 'Booking System'],
+    price: 297,
+    image: '/templates/photography.jpg'
+  },
+  {
+    id: 'design-studio',
+    name: 'Design Studio',
+    category: 'Creative Portfolio',
+    description: 'Creative design studio portfolio',
+    features: ['Project Showcase', 'Team Profiles', 'Process Timeline', 'Client Testimonials'],
+    price: 297,
+    image: '/templates/design-studio.jpg'
+  },
+  
+  // Restaurant & Local Business Templates
+  {
+    id: 'restaurant',
+    name: 'Restaurant',
+    category: 'Restaurant & Local Business',
+    description: 'Modern restaurant website with online ordering',
+    features: ['Menu Display', 'Online Ordering', 'Reservation System', 'Location Map'],
+    price: 397,
     image: '/templates/restaurant.jpg'
+  },
+  {
+    id: 'coffee-shop',
+    name: 'Coffee Shop',
+    category: 'Restaurant & Local Business',
+    description: 'Cozy coffee shop website',
+    features: ['Menu Items', 'Order Online', 'Loyalty Program', 'Events Calendar'],
+    price: 297,
+    image: '/templates/coffee-shop.jpg'
+  },
+  {
+    id: 'local-business',
+    name: 'Local Business',
+    category: 'Restaurant & Local Business',
+    description: 'Local business website with local SEO',
+    features: ['Local SEO', 'Service Areas', 'Customer Reviews', 'Contact Forms'],
+    price: 297,
+    image: '/templates/local-business.jpg'
+  },
+  
+  // Blog & Content Publishing Templates
+  {
+    id: 'blog-platform',
+    name: 'Blog Platform',
+    category: 'Blog & Content Publishing',
+    description: 'Content-focused blog with rich features',
+    features: ['Rich Editor', 'Categories', 'Comments', 'Newsletter', 'SEO Optimized'],
+    price: 297,
+    image: '/templates/blog.jpg'
+  },
+  {
+    id: 'news-site',
+    name: 'News Site',
+    category: 'Blog & Content Publishing',
+    description: 'Professional news and media website',
+    features: ['Article Management', 'Breaking News', 'Author Profiles', 'Social Sharing'],
+    price: 297,
+    image: '/templates/news-site.jpg'
+  },
+  {
+    id: 'magazine',
+    name: 'Digital Magazine',
+    category: 'Blog & Content Publishing',
+    description: 'Digital magazine with subscription system',
+    features: ['Issue Management', 'Subscription System', 'Reader Comments', 'Digital Downloads'],
+    price: 397,
+    image: '/templates/magazine.jpg'
   }
 ];
 
@@ -334,6 +444,104 @@ export default function BoltDIY() {
         onSettingsClick={() => console.log('Settings clicked')}
         onPreviewClick={() => console.log('Preview clicked')}
       />
+
+      {/* Hero Section */}
+      <section className="relative min-h-screen bg-gradient-to-br from-gray-900 via-gray-800 to-black text-white pt-24 pb-12 px-4 sm:px-6 lg:px-8 overflow-hidden">
+        {/* Background gradient overlay */}
+        <div className="absolute inset-0 bg-gradient-to-br from-blue-900/20 via-purple-900/20 to-indigo-900/20"></div>
+        
+        {/* Animated background elements */}
+        <div className="absolute inset-0 overflow-hidden">
+          <div className="absolute -top-40 -right-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob"></div>
+          <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-2000"></div>
+          <div className="absolute top-40 left-40 w-80 h-80 bg-pink-500 rounded-full mix-blend-multiply filter blur-xl opacity-20 animate-blob animation-delay-4000"></div>
+        </div>
+
+        <div className="relative max-w-7xl mx-auto">
+          <div className="text-center mb-12">
+            <div className="flex justify-center mb-6">
+              <Badge className="px-6 py-3 text-lg font-semibold bg-gradient-to-r from-green-500 to-blue-600 text-white border-0 shadow-lg">
+                🎨 DIY Web Development
+              </Badge>
+            </div>
+            
+            <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
+              Professional Templates with{" "}
+              <span className="block bg-gradient-to-r from-green-400 via-blue-400 to-purple-400 bg-clip-text text-transparent">
+                AI-Assisted Customization
+              </span>
+            </h1>
+            
+            <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+              70% less cost than custom development • Agency-quality results • Full creative control
+            </p>
+            
+            <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
+              <Button 
+                variant="gradient"
+                size="xl" 
+                onClick={() => setStep(1)}
+                className="group hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300"
+              >
+                Start Building Now
+                <ArrowRight className="ml-3 h-6 w-6 transition-transform group-hover:translate-x-1" />
+              </Button>
+              <Link href="/">
+                <Button 
+                  variant="outlineGradient" 
+                  size="xl"
+                  className="hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300"
+                >
+                  Try AI Agent Service
+                </Button>
+              </Link>
+            </div>
+
+            {/* Enhanced Stats Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-4 gap-6 max-w-6xl mx-auto">
+              <div className="flex items-center justify-center space-x-4 p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 shadow-xl">
+                <div className="w-12 h-12 bg-gradient-to-r from-green-500 to-green-600 rounded-xl flex items-center justify-center">
+                  <Zap className="h-6 w-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-2xl font-bold text-white">70% Less</div>
+                  <div className="text-sm text-gray-300">Than Custom Dev</div>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center space-x-4 p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 shadow-xl">
+                <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                  <Palette className="h-6 w-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-2xl font-bold text-white">40+</div>
+                  <div className="text-sm text-gray-300">Professional Templates</div>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center space-x-4 p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 shadow-xl">
+                <div className="w-12 h-12 bg-gradient-to-r from-purple-500 to-purple-600 rounded-xl flex items-center justify-center">
+                  <Sparkles className="h-6 w-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-2xl font-bold text-white">AI-Assisted</div>
+                  <div className="text-sm text-gray-300">Customization</div>
+                </div>
+              </div>
+              
+              <div className="flex items-center justify-center space-x-4 p-6 bg-white/10 backdrop-blur-sm rounded-2xl border border-white/20 shadow-xl">
+                <div className="w-12 h-12 bg-gradient-to-r from-pink-500 to-pink-600 rounded-xl flex items-center justify-center">
+                  <CheckCircle className="h-6 w-6 text-white" />
+                </div>
+                <div className="text-left">
+                  <div className="text-2xl font-bold text-white">Full Control</div>
+                  <div className="text-sm text-gray-300">Creative Freedom</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         {/* Progress Steps */}

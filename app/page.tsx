@@ -7,6 +7,7 @@ import QuoteForm from '@/components/quote-form';
 import { ProcessTimeline } from '@/components/process-timeline';
 import { SocialProof } from '@/components/social-proof';
 import { ChatBot } from '@/components/chat-bot';
+import { FeaturesShowcase } from '@/components/features-showcase';
 
 export default function Home() {
   const [showQuoteForm, setShowQuoteForm] = useState(false);
@@ -16,6 +17,7 @@ export default function Home() {
       <Header title="Starter Kit" />
       <main>
         <HeroSection onGetQuote={() => setShowQuoteForm(true)} />
+        <FeaturesShowcase serviceType="ai-agent" />
         <QuoteForm />
         <ProcessTimeline />
         <SocialProof />
