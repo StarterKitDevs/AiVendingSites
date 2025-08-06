@@ -58,6 +58,30 @@ export function HeroSection({ onGetQuote }: HeroSectionProps) {
             Professional design that rivals $10k+ agencies • Analytics work immediately • Zero setup required
           </p>
           
+          {/* $100 Portfolio/Landing Special Offer */}
+          <div className="mb-8 p-6 bg-gradient-to-r from-green-500/20 to-blue-500/20 backdrop-blur-sm rounded-2xl border border-green-400/30 shadow-xl">
+            <div className="text-center">
+              <Badge className="mb-3 bg-green-500 text-white border-0">
+                🎯 Special Offer
+              </Badge>
+              <h3 className="text-2xl font-bold text-white mb-2">
+                Portfolio/Landing Page - Just $100
+              </h3>
+              <p className="text-gray-300 mb-4">
+                Perfect for freelancers, creators, and small businesses • Professional design • Mobile-ready • SEO optimized
+              </p>
+              <Button 
+                variant="gradient"
+                size="lg" 
+                onClick={handleGetWebsiteNow}
+                className="group hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 bg-gradient-to-r from-green-500 to-blue-500"
+              >
+                Get Portfolio/Landing - $100
+                <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
+              </Button>
+            </div>
+          </div>
+          
           <div className="flex flex-col sm:flex-row gap-6 justify-center mb-16">
             <Button 
               variant="gradient"

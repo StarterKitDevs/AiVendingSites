@@ -61,12 +61,18 @@ interface FormData {
 }
 
 const websiteTypes: WebsiteType[] = [
+  { value: 'portfolio-landing', label: 'Portfolio/Landing Page', price: 100 },
   { value: 'basic-ai', label: 'Basic AI Website', price: 297 },
   { value: 'professional-ai', label: 'Professional AI Website', price: 497 },
   { value: 'enterprise-ai', label: 'Enterprise AI Website', price: 797 }
 ]
 
 const features: Feature[] = [
+  { id: 'responsive-design', label: 'Responsive Design', price: 0 },
+  { id: 'ssl-security', label: 'SSL Security', price: 0 },
+  { id: 'basic-seo', label: 'Basic SEO', price: 0 },
+  { id: 'contact-form', label: 'Contact Form', price: 0 },
+  { id: 'portfolio-gallery', label: 'Portfolio Gallery', price: 0 },
   { id: 'ai-personalization', label: 'AI Personalization', price: 0 },
   { id: 'voice-interface', label: 'Voice Interface', price: 0 },
   { id: 'pwa-capabilities', label: 'PWA Capabilities', price: 0 },
@@ -102,7 +108,12 @@ export default function QuoteForm() {
       responsive: true,
       ssl: true,
       analytics: false,
-      contentManagement: false
+      contentManagement: false,
+      responsiveDesign: true,
+      sslSecurity: true,
+      basicSeo: true,
+      contactForm: true,
+      portfolioGallery: false
     },
     images: []
   })
