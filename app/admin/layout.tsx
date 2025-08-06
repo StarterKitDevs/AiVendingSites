@@ -24,9 +24,11 @@ export default function AdminLayout({
     const checkAuth = async () => {
       try {
         const token = localStorage.getItem('admin_token');
+        console.log('Admin layout - checking auth, token:', token ? 'exists' : 'none');
         
         // If we're on login page and have a token, redirect to dashboard
         if (pathname === '/admin/login' && token) {
+          console.log('On login page with token, verifying...');
           const response = await fetch('/api/admin/verify', {
             headers: {
               'Authorization': `Bearer ${token}`
@@ -34,22 +36,26 @@ export default function AdminLayout({
           });
           
           if (response.ok) {
+            console.log('Token verified, redirecting to dashboard');
             setIsAuthenticated(true);
             router.push('/admin/dashboard');
             return;
           } else {
+            console.log('Token invalid, removing from storage');
             localStorage.removeItem('admin_token');
           }
         }
         
         // If we're not on login page and don't have a token, redirect to login
         if (!token && pathname !== '/admin/login') {
+          console.log('No token, redirecting to login');
           router.push('/admin/login');
           return;
         }
         
         // If we have a token and we're not on login page, verify it
         if (token && pathname !== '/admin/login') {
+          console.log('Verifying token for protected route...');
           const response = await fetch('/api/admin/verify', {
             headers: {
               'Authorization': `Bearer ${token}`
@@ -57,8 +63,10 @@ export default function AdminLayout({
           });
           
           if (response.ok) {
+            console.log('Token verified successfully');
             setIsAuthenticated(true);
           } else {
+            console.log('Token verification failed, redirecting to login');
             localStorage.removeItem('admin_token');
             router.push('/admin/login');
           }
@@ -84,20 +92,6 @@ export default function AdminLayout({
     );
   }
 
-  if (pathname === '/admin/login') {
-    return (
-      <ThemeProvider
-        attribute="class"
-        defaultTheme="system"
-        enableSystem
-        disableTransitionOnChange
-      >
-        {children}
-        <Toaster />
-      </ThemeProvider>
-    );
-  }
-
   return (
     <ThemeProvider
       attribute="class"
@@ -105,21 +99,30 @@ export default function AdminLayout({
       enableSystem
       disableTransitionOnChange
     >
-      <AdminAuthGuard isAuthenticated={isAuthenticated}>
-        <div className="min-h-screen bg-background">
-          <AdminSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
-          <div className={`transition-all duration-300 ${isSidebarOpen ? 'ml-64' : 'ml-16'}`}>
-            <AdminHeader 
-              isSidebarOpen={isSidebarOpen} 
-              setIsSidebarOpen={setIsSidebarOpen}
-            />
-            <main className="p-6">
-              {children}
-            </main>
-          </div>
-        </div>
-        <Toaster />
-      </AdminAuthGuard>
+      {pathname === '/admin/login' ? (
+        <>
+          {children}
+          <Toaster />
+        </>
+      ) : (
+        <AdminAuthGuard isAuthenticated={isAuthenticated}>
+          <>
+            <div className="min-h-screen bg-background flex">
+              <AdminSidebar isOpen={isSidebarOpen} setIsOpen={setIsSidebarOpen} />
+              <div className={`flex-1 transition-all duration-300 ease-in-out ${isSidebarOpen ? 'ml-64' : 'ml-16'}`}>
+                <AdminHeader 
+                  isSidebarOpen={isSidebarOpen} 
+                  setIsSidebarOpen={setIsSidebarOpen}
+                />
+                <main className="p-6 min-h-[calc(100vh-4rem)]">
+                  {children}
+                </main>
+              </div>
+            </div>
+            <Toaster />
+          </>
+        </AdminAuthGuard>
+      )}
     </ThemeProvider>
   );
 } 

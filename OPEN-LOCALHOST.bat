@@ -21,7 +21,7 @@ echo - Chat bot with quick replies
 echo - Dark/light mode toggle
 echo.
 echo 🔐 Admin Login:
-echo Email: admin@webai.studio
-echo Password: admin123
+echo Email: admin@starterkit.com
+echo Password: StarterKit2024!
 echo.
 pause 

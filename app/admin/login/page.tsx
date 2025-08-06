@@ -28,6 +28,8 @@ export default function AdminLogin() {
     }
     
     try {
+      console.log('Attempting login with:', credentials.email);
+      
       const response = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -35,17 +37,30 @@ export default function AdminLogin() {
       });
       
       const result = await response.json();
+      console.log('Login response:', result);
       
-      if (result.success) {
+      if (response.ok && result.success) {
         // Store auth token if provided
         if (result.token) {
           localStorage.setItem('admin_token', result.token);
+          console.log('Token stored successfully');
         }
-        router.push('/admin/dashboard');
+        console.log('Login successful, redirecting...');
+        
+        // Try router.push first, fallback to window.location.href
+        try {
+          await router.push('/admin/dashboard');
+        } catch (routerError) {
+          console.log('Router push failed, using window.location.href');
+          window.location.href = '/admin/dashboard';
+        }
       } else {
-        setError(result.message || 'Invalid credentials. Please try again.');
+        const errorMessage = result.error || result.message || 'Invalid credentials. Please try again.';
+        console.log('Login failed:', errorMessage);
+        setError(errorMessage);
       }
     } catch (error) {
+      console.error('Login error:', error);
       setError('Network error. Please check your connection and try again.');
     } finally {
       setIsLoading(false);
@@ -159,8 +174,8 @@ export default function AdminLogin() {
         <div className="bg-gray-800/50 rounded-lg p-4 border border-gray-700">
           <h3 className="text-sm font-medium text-gray-300 mb-2">Demo Credentials:</h3>
           <div className="text-xs text-gray-400 space-y-1">
-            <p>Email: admin@aiwebagency.com</p>
-            <p>Password: admin123</p>
+            <p>Email: admin@starterkit.com</p>
+            <p>Password: StarterKit2024!</p>
           </div>
         </div>
       </div>

@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const ADMIN_CREDENTIALS = {
-  email: 'admin@webai.studio',
-  password: 'admin123' // In production, use environment variables and proper hashing
+  email: 'admin@starterkit.com',
+  password: 'StarterKit2024!' // In production, use environment variables and proper hashing
 };
 
 // Simple token generation (in production, use proper JWT)

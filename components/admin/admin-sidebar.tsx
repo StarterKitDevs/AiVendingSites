@@ -77,36 +77,38 @@ export function AdminSidebar({ isOpen, setIsOpen }: AdminSidebarProps) {
 
   return (
     <div className={cn(
-      "fixed left-0 top-0 z-40 h-screen bg-white dark:bg-gray-900 border-r border-gray-200 dark:border-gray-700 transition-all duration-300",
+      "fixed left-0 top-0 z-40 h-screen bg-background border-r border-border transition-all duration-300 ease-in-out",
       isOpen ? "w-64" : "w-16"
     )}>
       <div className="flex h-full flex-col">
         {/* Header */}
-        <div className="flex h-16 items-center justify-between px-4 border-b border-gray-200 dark:border-gray-700">
+        <div className="flex h-16 items-center justify-between px-4 border-b border-border">
           {isOpen ? (
             <div className="flex items-center space-x-2">
               <div className="h-8 w-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">⚡</span>
+                <Zap className="h-4 w-4 text-white" />
               </div>
               <span className="text-xl font-bold text-foreground">
                 AI Web Agency
               </span>
             </div>
           ) : (
-            <Zap className="h-8 w-8 text-blue-600 mx-auto" />
+            <div className="h-8 w-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg flex items-center justify-center mx-auto">
+              <Zap className="h-4 w-4 text-white" />
+            </div>
           )}
           <Button
             variant="ghost"
             size="sm"
             onClick={() => setIsOpen(!isOpen)}
-            className="h-8 w-8 p-0"
+            className="h-8 w-8 p-0 hover:bg-accent"
           >
             {isOpen ? <ChevronLeft className="h-4 w-4" /> : <ChevronRight className="h-4 w-4" />}
           </Button>
         </div>
 
         {/* Navigation */}
-        <nav className="flex-1 space-y-1 px-2 py-4">
+        <nav className="flex-1 space-y-1 px-2 py-4 overflow-y-auto">
           {navigation.map((item) => {
             const isActive = pathname === item.href;
             return (
@@ -114,15 +116,15 @@ export function AdminSidebar({ isOpen, setIsOpen }: AdminSidebarProps) {
                 key={item.name}
                 href={item.href}
                 className={cn(
-                  "group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-colors",
+                  "group flex items-center px-2 py-2 text-sm font-medium rounded-md transition-all duration-200",
                   isActive
-                    ? "bg-blue-100 text-blue-900 dark:bg-blue-900 dark:text-blue-100"
+                    ? "bg-blue-100 text-blue-900 dark:bg-blue-900/50 dark:text-blue-100 shadow-sm"
                     : "text-muted-foreground hover:bg-accent hover:text-accent-foreground"
                 )}
               >
                 <item.icon
                   className={cn(
-                    "mr-3 h-5 w-5 flex-shrink-0",
+                    "mr-3 h-5 w-5 flex-shrink-0 transition-colors",
                     isActive
                       ? "text-blue-600 dark:text-blue-400"
                       : "text-muted-foreground group-hover:text-accent-foreground"
@@ -130,9 +132,9 @@ export function AdminSidebar({ isOpen, setIsOpen }: AdminSidebarProps) {
                 />
                 {isOpen && (
                   <div className="flex items-center justify-between w-full">
-                    <span>{item.name}</span>
+                    <span className="truncate">{item.name}</span>
                     {item.badge && (
-                      <Badge variant="secondary" className="ml-auto">
+                      <Badge variant="secondary" className="ml-auto text-xs">
                         {item.badge}
                       </Badge>
                     )}
@@ -149,17 +151,17 @@ export function AdminSidebar({ isOpen, setIsOpen }: AdminSidebarProps) {
             <div className="space-y-3">
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Active Projects</span>
-                <span className="font-semibold text-green-600">8</span>
+                <span className="font-semibold text-green-600 dark:text-green-400">8</span>
               </div>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">Revenue Today</span>
-                <span className="font-semibold text-blue-600">$2,450</span>
+                <span className="font-semibold text-blue-600 dark:text-blue-400">$2,450</span>
               </div>
               <div className="flex items-center justify-between text-sm">
                 <span className="text-muted-foreground">System Status</span>
                 <div className="flex items-center">
                   <div className="h-2 w-2 bg-green-500 rounded-full mr-2"></div>
-                  <span className="text-green-600">Online</span>
+                  <span className="text-green-600 dark:text-green-400">Online</span>
                 </div>
               </div>
             </div>
@@ -167,11 +169,11 @@ export function AdminSidebar({ isOpen, setIsOpen }: AdminSidebarProps) {
         )}
 
         {/* Logout */}
-        <div className="border-t border-gray-200 dark:border-gray-700 p-4">
+        <div className="border-t border-border p-4">
           <Button
             variant="ghost"
             onClick={handleLogout}
-            className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20"
+            className="w-full justify-start text-red-600 hover:text-red-700 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/20 transition-colors"
           >
             <LogOut className="mr-3 h-5 w-5" />
             {isOpen && <span>Logout</span>}

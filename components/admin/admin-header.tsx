@@ -109,7 +109,7 @@ export function AdminHeader({ isSidebarOpen, setIsSidebarOpen }: AdminHeaderProp
                 <div className="absolute right-0 mt-2 w-48 bg-card rounded-md shadow-lg border border-border py-1 z-50">
                   <div className="px-4 py-2 text-sm text-muted-foreground border-b border-border">
                     <div className="font-medium text-foreground">Admin User</div>
-                    <div className="text-muted-foreground">admin@webai.studio</div>
+                    <div className="text-muted-foreground">admin@starterkit.com</div>
                   </div>
                   <div className="py-1">
                     <a
