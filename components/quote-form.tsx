@@ -12,7 +12,55 @@ import { Badge } from '@/components/ui/badge'
 import { Textarea } from '@/components/ui/textarea'
 import { Loader2, CreditCard, CheckCircle, Upload, X, Lightbulb, AlertCircle } from 'lucide-react'
 
-const websiteTypes = [
+// Type definitions
+interface WebsiteType {
+  value: string;
+  label: string;
+  price: number;
+}
+
+interface Feature {
+  id: string;
+  label: string;
+  price: number;
+}
+
+interface DesignStyle {
+  value: string;
+  title: string;
+  description: string;
+}
+
+interface FormErrors {
+  businessName?: string;
+  email?: string;
+  websiteType?: string;
+}
+
+interface FormFeatures {
+  responsive: boolean;
+  ssl: boolean;
+  analytics: boolean;
+  contentManagement: boolean;
+  [key: string]: boolean; // Index signature for dynamic access
+}
+
+interface FormData {
+  businessName: string;
+  email: string;
+  budget: number;
+  websiteType: string;
+  designStyle: string;
+  projectDescription: string;
+  businessGoals: string;
+  targetAudience: string;
+  competitors: string;
+  specialRequirements: string;
+  features: FormFeatures;
+  images: string[];
+}
+
+const websiteTypes: WebsiteType[] = [
   { value: 'business', label: 'Business Website', price: 150 },
   { value: 'portfolio', label: 'Portfolio/Personal', price: 100 },
   { value: 'blog', label: 'Blog/News Site', price: 125 },
@@ -21,21 +69,21 @@ const websiteTypes = [
   { value: 'saas', label: 'SaaS Platform', price: 250 }
 ]
 
-const features = [
+const features: Feature[] = [
   { id: 'analytics', label: 'Analytics Setup', price: 30 },
   { id: 'responsive', label: 'Mobile Responsive', price: 0 },
   { id: 'ssl', label: 'SSL Security', price: 0 },
   { id: 'contentManagement', label: 'Content Management', price: 75 }
 ]
 
-const designStyles = [
+const designStyles: DesignStyle[] = [
   { value: 'modern', title: 'Modern', description: 'Clean, minimalist with bold typography' },
   { value: 'classic', title: 'Classic', description: 'Traditional, professional layout' },
   { value: 'minimalist', title: 'Minimalist', description: 'Simple, focused on content' }
 ]
 
 export default function QuoteForm() {
-  const [formData, setFormData] = useState({
+  const [formData, setFormData] = useState<FormData>({
     businessName: '',
     email: '',
     budget: 250,
@@ -55,11 +103,11 @@ export default function QuoteForm() {
     images: []
   })
 
-  const [estimate, setEstimate] = useState(250)
-  const [errors, setErrors] = useState({})
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [submitMessage, setSubmitMessage] = useState('')
-  const [paymentSuccess, setPaymentSuccess] = useState(false)
+  const [estimate, setEstimate] = useState<number>(250)
+  const [errors, setErrors] = useState<FormErrors>({})
+  const [isSubmitting, setIsSubmitting] = useState<boolean>(false)
+  const [submitMessage, setSubmitMessage] = useState<string>('')
+  const [paymentSuccess, setPaymentSuccess] = useState<boolean>(false)
 
   // Calculate estimate with proper updates
   const calculateEstimate = useCallback(() => {
@@ -74,8 +122,8 @@ export default function QuoteForm() {
   }, [calculateEstimate])
 
   // Form validation
-  const validateForm = () => {
-    const newErrors = {}
+  const validateForm = (): boolean => {
+    const newErrors: FormErrors = {}
     if (!formData.businessName.trim()) newErrors.businessName = 'Business name is required'
     if (!formData.email.trim()) newErrors.email = 'Email address is required'
     if (!formData.email.includes('@')) newErrors.email = 'Please enter a valid email address'
@@ -86,13 +134,13 @@ export default function QuoteForm() {
   }
 
   // Handle budget slider change
-  const handleBudgetChange = (value) => {
-    const newBudget = parseInt(value[0])
+  const handleBudgetChange = (value: number[]) => {
+    const newBudget = parseInt(value[0].toString())
     setFormData(prev => ({ ...prev, budget: newBudget }))
   }
 
   // Handle feature checkbox changes
-  const handleFeatureChange = (featureName, checked) => {
+  const handleFeatureChange = (featureName: string, checked: boolean) => {
     setFormData(prev => ({
       ...prev,
       features: {
@@ -103,7 +151,7 @@ export default function QuoteForm() {
   }
 
   // Handle image upload
-  const handleImageUpload = async (event) => {
+  const handleImageUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const files = event.target.files
     if (!files) return
 
@@ -112,7 +160,7 @@ export default function QuoteForm() {
       return
     }
 
-    const newImages = []
+    const newImages: string[] = []
     for (let i = 0; i < files.length && formData.images.length + newImages.length < 4; i++) {
       const file = files[i]
       
@@ -127,13 +175,15 @@ export default function QuoteForm() {
       }
 
       const reader = new FileReader()
-      reader.onload = (e) => {
-        newImages.push(e.target.result)
-        if (newImages.length === Math.min(files.length, 4 - formData.images.length)) {
-          setFormData(prev => ({
-            ...prev,
-            images: [...prev.images, ...newImages]
-          }))
+      reader.onload = (e: ProgressEvent<FileReader>) => {
+        if (e.target?.result) {
+          newImages.push(e.target.result as string)
+          if (newImages.length === Math.min(files.length, 4 - formData.images.length)) {
+            setFormData(prev => ({
+              ...prev,
+              images: [...prev.images, ...newImages]
+            }))
+          }
         }
       }
       reader.readAsDataURL(file)
@@ -141,7 +191,7 @@ export default function QuoteForm() {
   }
 
   // Remove image
-  const removeImage = (index) => {
+  const removeImage = (index: number) => {
     setFormData(prev => ({
       ...prev,
       images: prev.images.filter((_, i) => i !== index)
@@ -149,7 +199,7 @@ export default function QuoteForm() {
   }
 
   // Handle form submission
-  const handleSubmit = async (e) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     
     if (!validateForm()) {
@@ -510,8 +560,8 @@ export default function QuoteForm() {
                         <div className="flex items-center space-x-3">
                           <Checkbox
                             id={feature.id}
-                            checked={formData.features[feature.id] || false}
-                            onCheckedChange={(checked) => handleFeatureChange(feature.id, checked)}
+                            checked={formData.features[feature.id as keyof FormFeatures] || false}
+                            onCheckedChange={(checked) => handleFeatureChange(feature.id, checked as boolean)}
                             className="rounded"
                           />
                           <Label htmlFor={feature.id} className="text-white cursor-pointer">
