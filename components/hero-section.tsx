@@ -45,7 +45,7 @@ export function HeroSection({ onGetQuote }: HeroSectionProps) {
           </div>
           
           <h1 className="text-5xl md:text-7xl font-bold text-white mb-6 leading-tight">
-            AI-Powered Websites Built in
+            AI-Powered Websites Built in{" "}
             <span className="block bg-gradient-to-r from-blue-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
               Minutes, Not Weeks
             </span>

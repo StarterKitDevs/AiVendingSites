@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import React, { useState } from 'react';
 import Link from 'next/link';
 import { Button } from '@/components/ui/button';
 import { ThemeToggle } from '@/components/theme-toggle';
@@ -47,29 +47,30 @@ export function Navbar() {
           </div>
 
           {/* Desktop Actions */}
-          <div className="hidden md:flex items-center space-x-8">
-            <a href="#features" className="text-gray-300 hover:text-white transition-colors">
+          <div className="hidden md:flex items-center space-x-6">
+            <a href="#features" className="text-gray-300 hover:text-white transition-colors text-sm">
               Features
             </a>
-            <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">
+            <a href="#pricing" className="text-gray-300 hover:text-white transition-colors text-sm">
               Pricing
             </a>
-            <a href="/bolt-diy" className="text-gray-300 hover:text-white transition-colors">
+            <a href="/bolt-diy" className="text-gray-300 hover:text-white transition-colors text-sm">
               Bolt DIY
             </a>
-            <a href="#contact" className="text-gray-300 hover:text-white transition-colors">
+            <a href="#contact" className="text-gray-300 hover:text-white transition-colors text-sm">
               Contact
             </a>
             <ThemeToggle />
           </div>
 
-          {/* Mobile menu button */}
-          <div className="md:hidden">
+          {/* Mobile menu button - Always visible on mobile */}
+          <div className="md:hidden flex items-center">
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="p-2 text-white hover:bg-white/10"
+              className="p-2 text-white hover:bg-white/10 focus:outline-none focus:ring-2 focus:ring-white/20"
+              aria-label="Toggle mobile menu"
             >
               {isMenuOpen ? (
                 <X className="h-6 w-6" />
@@ -81,33 +82,69 @@ export function Navbar() {
         </div>
       </div>
 
-      {/* Mobile Navigation */}
+      {/* Mobile Navigation - Full screen overlay */}
       {isMenuOpen && (
-        <div className="md:hidden">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3 bg-black/95 border-t border-white/20">
-            {navigation.map((item) => (
-              <Link
-                key={item.name}
-                href={item.href}
-                className="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                {item.name}
-              </Link>
-            ))}
-            <div className="pt-4 flex items-center justify-between">
-              <ThemeToggle />
-              <div className="flex items-center space-x-2">
-                <Link href="/admin/login">
-                  <Button 
-                    variant="ghost" 
-                    size="sm"
-                    className="text-gray-300 hover:text-white"
-                  >
-                    <Settings className="h-4 w-4 mr-1" />
-                    Admin
-                  </Button>
+        <div className="md:hidden fixed inset-0 z-40 bg-black/95 backdrop-blur-md">
+          <div className="pt-20 px-4">
+            <div className="space-y-6">
+              {navigation.map((item) => (
+                <Link
+                  key={item.name}
+                  href={item.href}
+                  className="block text-white hover:text-blue-400 text-xl font-medium transition-colors py-3 border-b border-white/10"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  {item.name}
                 </Link>
+              ))}
+              
+              {/* Mobile additional links */}
+              <div className="pt-6 space-y-4">
+                <a 
+                  href="#features" 
+                  className="block text-gray-300 hover:text-white text-lg transition-colors py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Features
+                </a>
+                <a 
+                  href="#pricing" 
+                  className="block text-gray-300 hover:text-white text-lg transition-colors py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Pricing
+                </a>
+                <a 
+                  href="/bolt-diy" 
+                  className="block text-gray-300 hover:text-white text-lg transition-colors py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Bolt DIY
+                </a>
+                <a 
+                  href="#contact" 
+                  className="block text-gray-300 hover:text-white text-lg transition-colors py-2"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Contact
+                </a>
+              </div>
+              
+              {/* Mobile admin access and theme toggle */}
+              <div className="pt-6 flex flex-col space-y-4 border-t border-white/20">
+                <div className="flex items-center justify-between">
+                  <ThemeToggle />
+                  <Link href="/admin/login" onClick={() => setIsMenuOpen(false)}>
+                    <Button 
+                      variant="ghost" 
+                      size="sm"
+                      className="text-gray-300 hover:text-white"
+                    >
+                      <Settings className="h-4 w-4 mr-2" />
+                      Admin Access
+                    </Button>
+                  </Link>
+                </div>
               </div>
             </div>
           </div>
