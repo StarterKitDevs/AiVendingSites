@@ -329,4 +329,6 @@ class DevAgent:
 
 
 # Create global instance
-dev_agent = DevAgent() 
+
+# Create global instance
+dev_agent = DevAgent()

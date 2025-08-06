@@ -194,4 +194,6 @@ class DesignAgent:
 
 
 # Create global instance
- 
+
+# Create global instance
+design_agent = DesignAgent()

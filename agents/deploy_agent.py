@@ -310,4 +310,6 @@ class DeployAgent:
 
 
 # Create global instance
-deploy_agent = DeployAgent() 
+
+# Create global instance
+deploy_agent = DeployAgent()

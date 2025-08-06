@@ -340,4 +340,6 @@ class NotifyAgent:
 
 
 # Create global instance
-notify_agent = NotifyAgent() 
+
+# Create global instance
+notify_agent = NotifyAgent()
