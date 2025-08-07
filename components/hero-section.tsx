@@ -76,7 +76,7 @@ export function HeroSection({ onGetQuote }: HeroSectionProps) {
                 onClick={handleGetWebsiteNow}
                 className="group hover:scale-[1.02] active:scale-[0.98] transition-transform duration-300 bg-gradient-to-r from-green-500 to-blue-500"
               >
-                Get Portfolio/Landing - $100
+                Claim
                 <ArrowRight className="ml-2 h-5 w-5 transition-transform group-hover:translate-x-1" />
               </Button>
             </div>

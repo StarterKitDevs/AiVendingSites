@@ -1,4 +1,9 @@
 import { NextRequest, NextResponse } from 'next/server';
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2023-10-16',
+});
 
 export async function POST(request: NextRequest) {
   try {
@@ -20,26 +25,23 @@ export async function POST(request: NextRequest) {
       );
     }
 
-    // Create comprehensive payment intent
-    const paymentIntent = {
-      id: `pi_${Math.random().toString(36).substr(2, 9)}`,
-      project_id: body.project_id,
+    // Create a real Stripe PaymentIntent
+    const paymentIntent = await stripe.paymentIntents.create({
       amount: body.amount,
       currency: 'usd',
-      status: 'requires_payment_method',
-      client_secret: `pi_${Math.random().toString(36).substr(2, 9)}_secret_${Math.random().toString(36).substr(2, 9)}`,
-      created_at: new Date().toISOString(),
       metadata: {
         project_id: body.project_id.toString(),
-        source: 'ai_web_agency_frontend',
-        version: '2.0'
-      }
-    };
+        source: 'ai_web_agency_frontend'
+      },
+      automatic_payment_methods: {
+        enabled: true,
+      },
+    });
 
     // Log payment intent creation
     console.log('Payment intent created:', {
       payment_intent_id: paymentIntent.id,
-      project_id: paymentIntent.project_id,
+      project_id: body.project_id,
       amount: paymentIntent.amount,
       amount_usd: (paymentIntent.amount / 100).toFixed(2)
     });

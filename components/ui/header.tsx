@@ -3,7 +3,7 @@
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { ThemeToggle } from '@/components/theme-toggle';
-import { Zap, Sparkles, Settings, Play, Home } from 'lucide-react';
+import { Zap, Sparkles, Settings, Play, Home, CreditCard } from 'lucide-react';
 import Link from 'next/link';
 
 interface HeaderProps {
@@ -45,6 +45,14 @@ export function Header({
             </Badge>
           </div>
           <div className="flex items-center space-x-4">
+            {/* Subscriptions Link */}
+            <Link href="/subscriptions">
+              <Button variant="outline" size="sm" className="hidden sm:flex">
+                <CreditCard className="mr-2 h-4 w-4" />
+                Subscriptions
+              </Button>
+            </Link>
+            
             {/* Theme Toggle */}
             <ThemeToggle variant="ghost" size="icon" />
             {showSettings && (
