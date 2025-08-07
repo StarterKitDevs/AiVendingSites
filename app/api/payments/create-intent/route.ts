@@ -3,18 +3,21 @@ import { NextRequest, NextResponse } from 'next/server';
 // Use require for Stripe to avoid module resolution issues
 const Stripe = require('stripe');
 
-// Validate Stripe secret key
-const stripeKey = process.env.STRIPE_SECRET_KEY;
-if (!stripeKey) {
-  throw new Error('STRIPE_SECRET_KEY environment variable is not defined. Please set it in your Vercel dashboard under Project → Settings → Environment Variables.');
-}
-
-const stripe = new Stripe(stripeKey, {
-  apiVersion: '2023-10-16',
-});
-
 export async function POST(request: NextRequest) {
   try {
+    // Check for Stripe secret key at runtime
+    const stripeKey = process.env.STRIPE_SECRET_KEY;
+    if (!stripeKey) {
+      return NextResponse.json(
+        { error: 'STRIPE_SECRET_KEY environment variable is not defined. Please set it in your Vercel dashboard under Project → Settings → Environment Variables.' },
+        { status: 500 }
+      );
+    }
+
+    const stripe = new Stripe(stripeKey, {
+      apiVersion: '2023-10-16',
+    });
+
     const body = await request.json();
     
     // Validate payment data
