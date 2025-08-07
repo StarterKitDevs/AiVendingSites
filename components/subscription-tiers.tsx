@@ -7,69 +7,13 @@ import { Badge } from '@/components/ui/badge';
 import { CheckCircle, Zap, Star, Shield, Brain, ArrowRight, Clock } from 'lucide-react';
 import { StripeProvider } from '@/components/stripe-provider';
 import { StripePaymentForm } from '@/components/stripe-payment-form';
-
-interface SubscriptionTier {
-  name: string;
-  price: number;
-  trialPrice: number;
-  trialDays: number;
-  features: string[];
-}
+import { SUBSCRIPTION_TIERS } from '@/lib/subscriptions';
 
 interface SubscriptionTiersProps {
   projectId?: string;
   email?: string;
   onSubscribe?: (tier: string) => void;
 }
-
-const SUBSCRIPTION_TIERS = {
-  'essential-care': {
-    name: 'Essential Care',
-    price: 1700,
-    trialPrice: 500,
-    trialDays: 7,
-    features: [
-      '5 AI-driven revision conversations/month',
-      'Automated revision history backups',
-      'Performance alerts'
-    ]
-  },
-  'optimization-pro': {
-    name: 'Optimization Pro',
-    price: 4700,
-    trialPrice: 1500,
-    trialDays: 7,
-    features: [
-      'Unlimited revisions',
-      'AI-driven conversion & UX suggestions',
-      'A/B testing support'
-    ]
-  },
-  'growth-partner': {
-    name: 'Growth Partner',
-    price: 9700,
-    trialPrice: 2500,
-    trialDays: 7,
-    features: [
-      'Everything in Optimization Pro',
-      'Dedicated AI optimization agent',
-      'Weekly performance reports',
-      'Priority queue'
-    ]
-  },
-  'co-pilot-addon': {
-    name: 'Co-Pilot Add-On',
-    price: 2900,
-    trialPrice: 1000,
-    trialDays: 7,
-    features: [
-      'Personalized Co-Pilot guidance',
-      'Deployment methods support',
-      'Self-hosting assistance',
-      'Rapid prototyping support'
-    ]
-  }
-};
 
 export function SubscriptionTiers({ projectId, email, onSubscribe }: SubscriptionTiersProps) {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
@@ -91,15 +35,15 @@ export function SubscriptionTiers({ projectId, email, onSubscribe }: Subscriptio
   const getTierIcon = (tier: string) => {
     switch (tier) {
       case 'essential-care':
-        return <Shield className="h-6 w-6" />;
+        return <Shield size={24} />;
       case 'optimization-pro':
-        return <Zap className="h-6 w-6" />;
+        return <Zap size={24} />;
       case 'growth-partner':
-        return <Star className="h-6 w-6" />;
+        return <Star size={24} />;
       case 'co-pilot-addon':
-        return <Brain className="h-6 w-6" />;
+        return <Brain size={24} />;
       default:
-        return <CheckCircle className="h-6 w-6" />;
+        return <CheckCircle size={24} />;
     }
   };
 
