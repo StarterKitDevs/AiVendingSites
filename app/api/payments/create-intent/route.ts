@@ -3,7 +3,13 @@ import { NextRequest, NextResponse } from 'next/server';
 // Use require for Stripe to avoid module resolution issues
 const Stripe = require('stripe');
 
-const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+// Validate Stripe secret key
+const stripeKey = process.env.STRIPE_SECRET_KEY;
+if (!stripeKey) {
+  throw new Error('STRIPE_SECRET_KEY environment variable is not defined. Please set it in your Vercel dashboard under Project → Settings → Environment Variables.');
+}
+
+const stripe = new Stripe(stripeKey, {
   apiVersion: '2023-10-16',
 });
 
@@ -58,6 +64,15 @@ export async function POST(request: NextRequest) {
 
   } catch (error) {
     console.error('Error creating payment intent:', error);
+    
+    // Check if it's a Stripe authentication error
+    if (error instanceof Error && error.message && error.message.includes('authentication')) {
+      return NextResponse.json(
+        { error: 'Stripe authentication failed. Please check your STRIPE_SECRET_KEY environment variable.' },
+        { status: 500 }
+      );
+    }
+    
     return NextResponse.json(
       { error: 'Failed to create payment intent' },
       { status: 500 }
